@@ -1,6 +1,6 @@
 # Pacman
 
-´´´Python
+```python
 import random
 from datetime import datetime
 from time import sleep, strftime
