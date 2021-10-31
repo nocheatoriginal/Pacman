@@ -79,4 +79,4 @@ if __name__ == '__main__':
 		pacman_bar(i + 1, pLength, prefix=f'Package:	{random_KiB:.1f} KiB {random_KS}K/s {c_time}', suffix='', length=pLength)
 
 	input()
-´´´
+```
