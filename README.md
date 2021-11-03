@@ -5,6 +5,8 @@ import random
 from datetime import datetime
 from time import sleep, strftime
 
+# by nocheatoriginal
+
 global pacman, snack
 pacman = 'C'
 snack = 'o'
