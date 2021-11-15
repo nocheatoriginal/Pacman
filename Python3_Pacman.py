@@ -1,4 +1,5 @@
 import random
+import os
 from datetime import datetime
 from time import sleep, strftime
 
@@ -6,21 +7,19 @@ global pacman, snack
 pacman = 'C'
 snack = 'o'
 
+def force_neofetch():
+	try:
+		os.system('neofetch')
+	except:
+		return "ERROR: neofetch not defined"
+
 def pacman_art():
 	print("  .--.")
 	print(" / _.-' .--.   .--.   .--.")
 	print(" \\  '-. '--'   '--'   '--'")
 	print("  '--'")
 
-def display_pacman_art():
-	print("\t\t\t\t\tdata_types[\"Integer\": \"int\"]")
-	print("  .--.\t\t\t\t\tdata_types[\"Floating_Point\": \"float\"]")
-	print(" / _.-' .--.   .--.   .--.\t\tdata_types[\"Character\": \"char\"]")
-	print(" \\  '-. '--'   '--'   '--'\t\tdata_types[\"String\": \"str\"]")
-	print("  '--'\t\t\t\t\tdata_types[\"Boolean\": \"bool\"]")
-
-
-def is_upper(c):
+def is_upper(c): # Or just use function '.isupper()'
 	if c >= 'A' and c <= 'Z':
 		return c
 	else:
@@ -48,17 +47,19 @@ def pacman_bar(iteration, total, prefix='', suffix='', decimals=1, length=100, f
 		else:
 			snack = 'o'
 		
-	bar = fill * filledLength + pacman + this_snack
+	bar = fill * filledLength + pacman + this_snack # bsp.: 95.7% bar = "---------------------------------------------C o"
+
 	print(f'\r{prefix} [{bar}] {percent}% {suffix}', end='\r')
 	if iteration == total:
 		print()
 
-def print_pacman():
-	display_pacman_art(), print("\n")
+def draw_pacman():
+	force_neofetch()
+	pacman_art()
+	print("\n")
 
-
-if __name__ == '__main__':
-	print_pacman()
+def main():
+	draw_pacman()
 
 	items = list(range(0, 47))
 	pLength = len(items)
@@ -67,13 +68,26 @@ if __name__ == '__main__':
 	random_KS = random.randint(301, 989)
 	c_time = datetime.now().strftime("%H:%M:%S")
 
-	pacman_bar(0, pLength, prefix=f'Package:	{random_KiB:.1f} KiB {random_KS}K/s {c_time}', suffix='', length=pLength)
+	pacman_bar(0, pLength, prefix=f'Pacman:	{random_KiB:.1f} KiB {random_KS}K/s {c_time}', suffix='', length=pLength)
 	for i, item in enumerate(items):
 		random_KS = random.randint(301, 989)
 		c_time = datetime.now().strftime("%H:%M:%S")
 		
 		sleep(0.5)
-		pacman_bar(i + 1, pLength, prefix=f'Package:	{random_KiB:.1f} KiB {random_KS}K/s {c_time}', suffix='', length=pLength)
+		pacman_bar(i + 1, pLength, prefix=f'Pacman:	{random_KiB:.1f} KiB {random_KS}K/s {c_time}', suffix='', length=pLength)
 
-	input()
+	while True:
+		print("Type \"exit\" to quit the application!\n>>> ", end='')
+		user_input = input()
+		if user_input == 'exit' or user_input == 'e' or user_input == 'quit' or user_input == 'q':
+			quit()
+		else:
+			if not user_input == '' and not user_input.__contains__(" "):
+				print(f"{user_input}: command not found")
+			else:
+				print("\r")
 
+
+
+if __name__ == '__main__':
+	main()
